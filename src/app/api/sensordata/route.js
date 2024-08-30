@@ -38,7 +38,7 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const { sensor_id, temperature, humidity, LDR_status, flame_status, ledpin19_status } = await request.json();
+    const { sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status } = await request.json();
 
     if (!sensor_id || temperature == null || humidity == null) {
       return new Response(JSON.stringify({ error: 'Invalid input data' }), {
@@ -48,8 +48,8 @@ export async function POST(request) {
     }
 
     const res = await client.query(
-      'INSERT INTO sensor_data (sensor_id, temperature, humidity, LDR_status, flame_status, ledpin19_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [sensor_id, temperature, humidity, LDR_status, flame_status, ledpin19_status]
+      'INSERT INTO sensor_data (sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status]
     );
     return new Response(JSON.stringify(res.rows[0]), {
       status: 201,
