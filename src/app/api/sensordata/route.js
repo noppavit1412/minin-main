@@ -11,12 +11,14 @@ const client = new Client({
 client.connect();
 
 const handleError = (error) => {
-  console.error('Database error:', error);
+  console.error('Database error:', error.message);
+  console.error('Stack trace:', error.stack);
   return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
-    status: 500,
-    headers: { 'Content-Type': 'application/json' },
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
   });
 };
+
 
 export async function GET() {
   try {
@@ -38,25 +40,26 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const { sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status } = await request.json();
+      const { sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status } = await request.json();
 
-    if (!sensor_id || temperature == null || humidity == null) {
-      return new Response(JSON.stringify({ error: 'Invalid input data' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
+      if (!sensor_id || temperature == null || humidity == null) {
+          return new Response(JSON.stringify({ error: 'Invalid input data' }), {
+              status: 400,
+              headers: { 'Content-Type': 'application/json' },
+          });
+      }
+
+      const res = await client.query(
+          'INSERT INTO sensor_data (sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+          [sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status || null]
+      );
+      return new Response(JSON.stringify(res.rows[0]), {
+          status: 201,
+          headers: { 'Content-Type': 'application/json' },
       });
-    }
-
-    const res = await client.query(
-      'INSERT INTO sensor_data (sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status]
-    );
-    return new Response(JSON.stringify(res.rows[0]), {
-      status: 201,
-      headers: { 'Content-Type': 'application/json' },
-    });
   } catch (error) {
-    return handleError(error);
+      return handleError(error);
   }
 }
+
 
