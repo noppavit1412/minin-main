@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 // SensorStatus Component
-const SensorStatus = ({ motor_Status, heater_Status }) => {
+const SensorStatus = ({ LDR_status, flame_status }) => {
   return (
     <div style={{ 
       marginTop: '20px', 
@@ -15,8 +15,8 @@ const SensorStatus = ({ motor_Status, heater_Status }) => {
       textAlign: 'center' // Center align text
     }}>
       <h3>Sensor Status</h3>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Motor: <span style={{ color: motor_Status ? 'green' : 'red' }}>{motor_Status ? 'On' : 'Off'}</span></p>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Heater: <span style={{ color: heater_Status ? 'orange' : 'blue' }}>{heater_Status ? 'warm' : 'cool'}</span></p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>LDR Status: <span style={{ color: LDR_status ? 'green' : 'red' }}>{LDR_status ? 'On' : 'Off'}</span></p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status ? 'orange' : 'blue' }}>{flame_status ? 'warm' : 'cool'}</span></p>
     </div>
   );
 };
@@ -26,8 +26,8 @@ const SensorDataGraph = () => {
   const [temperature, setTemperature] = useState(0);
   const [humidity, setHumidity] = useState(0);
 
-  const [motor_Status, setMotorStatus] = useState(false);
-  const [heater_Status, setHeaterStatus] = useState(false);
+  const [LDR_status, setLDRStatus] = useState(false);
+  const [flame_status, setflameStatus] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,8 +47,8 @@ const SensorDataGraph = () => {
         const latestData = data[data.length - 1]; // Assuming latest data has the latest status
         setTemperature(latestData.temperature);
         setHumidity(latestData.humidity);
-        setMotorStatus(latestData.motor_status);
-        setHeaterStatus(latestData.heater_status);
+        setLDRStatus(latestData.LDR_status);
+        setflameStatus(latestData.flame_status);
   
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -101,7 +101,7 @@ const SensorDataGraph = () => {
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}> {/* Center the SensorStatus component */}
-        <SensorStatus motor_Status={motor_Status} heater_Status={heater_Status} />
+        <SensorStatus LDR_status={LDR_status} flame_status={flame_status} />
       </div>
     </div>
   );
