@@ -14,9 +14,10 @@ const SensorStatus = ({ light_level, flame_status }) => {
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', 
       textAlign: 'center' // Center align text
     }}>
-      <h3>Sensor Status</h3>
+      <h3>Status</h3>
+      <br></br>
       <p style={{ fontSize: '16px', fontWeight: 'bold' }}>LDR_light_level: <span style={{ color: light_level ? 'green' : 'red' }}>{light_level ? 'On' : 'Off'}</span></p>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status ? 'orange' : 'blue' }}>{flame_status ? 'warm' : 'cool'}</span></p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status ? 'black' : 'orange' }}>{flame_status ? 'Dark' : 'Bright'}</span></p>
     </div>
   );
 };
