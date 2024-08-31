@@ -16,11 +16,17 @@ const SensorStatus = ({ light_level, flame_status }) => {
     }}>
       <h3>Status</h3>
       <br></br>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>LDR_light_Status: <span style={{ color: light_level ? 'yellow' : 'black' }}>{light_level ? 'Bright' : 'Dark'}</span></p>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status ? 'black' : 'red' }}>{flame_status ? 'Not Flame' : 'flame'}</span></p>
+      {/* Display the actual light level value */}
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>
+        LDR Light Level: <span style={{ color: light_level < 20000 ? 'yellow' : 'black' }}>{light_level}</span>
+      </p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>
+        Flame Status: <span style={{ color: flame_status ? 'black' : 'red' }}>{flame_status ? 'No Flame' : 'Flame Detected'}</span>
+      </p>
     </div>
   );
 };
+
 
 // SensorDataGraph Component
 const SensorDataGraph = () => {
