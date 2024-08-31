@@ -4,8 +4,8 @@ import LEDControl from './component/LEDControl';
 export default function Home() {
   return (
     <>
-      <SensorDataGraph/>
       <LEDControl/>
+      <SensorDataGraph/>
     </>
   );
 }
