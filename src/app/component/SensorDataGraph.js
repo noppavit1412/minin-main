@@ -18,7 +18,7 @@ const SensorStatus = ({ light_level, flame_status }) => {
       <br></br>
       {/* Display the actual light level value */}
       <p style={{ fontSize: '16px', fontWeight: 'bold' }}>
-        LDR Light Level: <span style={{ color: light_level < 20000 ? 'yellow' : 'black' }}>{light_level}</span>
+        LDR Light Level: <span style={{ color: light_level < 20000 ? 'orange' : 'green' }}>{light_level}</span>
       </p>
       <p style={{ fontSize: '16px', fontWeight: 'bold' }}>
         Flame Status: <span style={{ color: flame_status ? 'black' : 'red' }}>{flame_status ? 'No Flame' : 'Flame Detected'}</span>
