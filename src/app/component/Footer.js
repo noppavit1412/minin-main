@@ -1,48 +1,27 @@
-
-export default function Footer(){
-    return(
-        <>
-
-        <footer className="footer">
-        <div className="container">
-            <div className="column">
-            <h5>เกี่ยวกับเรา</h5>
-            <p>ข้อความเกี่ยวกับบริษัทหรือเว็บไซต์ของคุณที่นี่ อธิบายเกี่ยวกับการให้บริการหรือสิ่งที่น่าสนใจอื่น ๆ</p>
+export default function Footer() {
+    return (
+        <footer className="footer" style={footerStyle}>
+            <div className="container">
+                <div className="column">
+                    <h5>About Us</h5>
+                    <p>Commodo magna adipisicing dolor enim do reprehenderit excepteur occaecat. Consequat 
+                        mollit commodo aliqua ad incididunt Lorem pariatur. Tempor adipisicing exercitation 
+                        magna adipisicing voluptate do tempor nisi qui cillum do do fugiat officia.</p>
+                </div>
             </div>
-            <div className="column">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/services">Service</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
+            <div className="copyright">
+                © 2024 Company Name. All rights reserved.
             </div>
-            <div className="column">
-            <h5>บริการ</h5>
-            <ul>
-                <li><a href="#">Service 1</a></li>
-                <li><a href="#">Service 2</a></li>
-                <li><a href="#">More Service</a></li>
-            </ul>
-            </div>
-            <div className="column">
-            <h5>ติดต่อเรา</h5>
-            <ul>
-                <li>Address: Suthep, ChaingMai, Thailand</li>
-                <li>Email: 999@99999.com</li>
-                <li>Tel: +66 999 999 999</li>
-            </ul>
-            </div>
-        </div>
-        <div className="copyright">
-            © 2024 Company Name. All rights reserved.
-        </div>
         </footer>
+    );
+}
 
-
-
-
-
-        </>
-        )
-    }
+const footerStyle = {
+    position: 'fixed',
+    bottom: '0',
+    width: '100%',
+    boxShadow: '0 -4px 10px rgba(0, 0, 0, 0.1)',
+    backgroundColor: '#fff', // Adjust to your desired background color
+    zIndex: '1000', // Ensure it stays on top of other content
+    padding: '10px 0',
+};

@@ -1,7 +1,7 @@
 // src/app/component/LEDControl.js
 'use client';
 import { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LEDControlButton = () => {
     const [ledStatus, setLedStatus] = useState(false);
@@ -58,11 +58,24 @@ const LEDControlButton = () => {
                 onClick={toggleLed}
                 disabled={loading}
                 className={`btn ${loading ? 'btn-secondary' : ledStatus ? 'btn-danger' : 'btn-success'} me-2`}
+                style={buttonStyle}
             >
-                {loading ? 'Processing...' : ledStatus ? 'Turn LED Off' : 'Turn LED On'}
+                {loading ? (
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                ) : ledStatus ? 'Turn LED Off' : 'Turn LED On'}
             </button>
         </div>
     );
+};
+
+const buttonStyle = {
+    minWidth: '150px',
+    borderRadius: '30px',
+    padding: '10px 20px',
+    fontSize: '1rem',
+    fontWeight: '500',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'background-color 0.3s ease',
 };
 
 export default LEDControlButton;

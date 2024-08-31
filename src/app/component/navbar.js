@@ -31,25 +31,25 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar" style={navbarStyle}>
             <div className="container-fluid">
-                <Link className="navbar-brand" href="/">Navbar</Link>
+                <Link href="/" className="navbar-brand" style={brandStyle}>Navbar</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon" />
+                    <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0" style={navListStyle}>
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" href="/">Tem</Link>
+                            <Link href="/" className="nav-link" style={linkStyle}>Tem</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" href="/about">Graph</Link>
+                            <Link href="/about" className="nav-link" style={linkStyle}>Graph</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" href="/service">Service</Link>
+                            <Link href="/service" className="nav-link" style={linkStyle}>Service</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" href="/contact">Contact</Link>
+                            <Link href="/contact" className="nav-link" style={linkStyle}>Contact</Link>
                         </li>
                     </ul>
                 </div>
@@ -57,3 +57,37 @@ export default function Navbar() {
         </nav>
     );
 }
+
+const navbarStyle = {
+    backgroundColor: '#fff',
+    padding: '10px 20px',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+    position: 'fixed',
+    width: '100%',
+    top: '0',
+    zIndex: '1000',
+};
+
+const brandStyle = {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: '#333',
+    textDecoration: 'none',
+};
+
+const navListStyle = {
+    display: 'flex',
+    gap: '20px',
+};
+
+const linkStyle = {
+    fontSize: '1rem',
+    color: '#333',
+    textDecoration: 'none',
+    padding: '5px 10px',
+    transition: 'color 0.2s ease-in-out',
+};
+
+linkStyle[':hover'] = {
+    color: '#007bff',
+};
