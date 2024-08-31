@@ -66,3 +66,19 @@ export async function POST(request) {
         return handleError(error);
     }
 }
+
+async function initializeDatabase() {
+    try {
+        const result = await client.query('SELECT * FROM led_status WHERE pin = $1', [19]);
+        if (result.rowCount === 0) {
+            await client.query('INSERT INTO led_status (pin, status) VALUES ($1, $2)', [19, false]);
+            console.log('Initialized pin 19 with status false.');
+        }
+    } catch (error) {
+        console.error('Error during database initialization:', error);
+    }
+}
+
+// Call this function during your server startup
+initializeDatabase();
+
