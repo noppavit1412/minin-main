@@ -16,8 +16,8 @@ const SensorStatus = ({ light_level, flame_status }) => {
     }}>
       <h3>Status</h3>
       <br></br>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>LDR_light_Status: <span style={{ color: light_level ? 'green' : 'red' }}>{light_level ? 'On' : 'Off'}</span></p>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status ? 'black' : 'orange' }}>{flame_status ? 'Dark' : 'Bright'}</span></p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>LDR_light_Status: <span style={{ color: light_level ? 'green' : 'red' }}>{light_level ? 'Dark' : 'Bright'}</span></p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status ? 'black' : 'orange' }}>{flame_status ? 'Flame' : 'Not flame'}</span></p>
     </div>
   );
 };
