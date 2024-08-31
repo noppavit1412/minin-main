@@ -1,4 +1,3 @@
-// app/api/sensordata/route.js
 import { Client } from 'pg';
 import dotenv from 'dotenv';
 
@@ -18,7 +17,6 @@ const handleError = (error) => {
       headers: { 'Content-Type': 'application/json' },
   });
 };
-
 
 export async function GET() {
   try {
@@ -42,7 +40,10 @@ export async function POST(request) {
   try {
       const { sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status } = await request.json();
 
+      console.log("Received data:", { sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status });
+
       if (!sensor_id || temperature == null || humidity == null) {
+          console.error("Invalid input data:", { sensor_id, temperature, humidity });
           return new Response(JSON.stringify({ error: 'Invalid input data' }), {
               status: 400,
               headers: { 'Content-Type': 'application/json' },
@@ -53,13 +54,15 @@ export async function POST(request) {
           'INSERT INTO sensor_data (sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
           [sensor_id, temperature, humidity, light_level, flame_status, ledpin19_status || null]
       );
+
+      console.log("Insert successful:", res.rows[0]);
+
       return new Response(JSON.stringify(res.rows[0]), {
           status: 201,
           headers: { 'Content-Type': 'application/json' },
       });
   } catch (error) {
+      console.error("Error during POST:", error);
       return handleError(error);
   }
 }
-
-
