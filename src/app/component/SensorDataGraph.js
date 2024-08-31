@@ -16,8 +16,8 @@ const SensorStatus = ({ light_level, flame_status }) => {
     }}>
       <h3>Status</h3>
       <br></br>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>LDR_light_level: <span style={{ color: light_level === 1 ? 'green' : 'red' }}>{light_level === 1 ? 'On' : 'Off'}</span></p>
-      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status === 1 ? 'orange' : 'black' }}>{flame_status === 1 ? 'Bright' : 'Dark'}</span></p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>LDR_light_Status: <span style={{ color: light_level ? 'green' : 'red' }}>{light_level ? 'On' : 'Off'}</span></p>
+      <p style={{ fontSize: '16px', fontWeight: 'bold' }}>Flame Status: <span style={{ color: flame_status ? 'black' : 'orange' }}>{flame_status ? 'Dark' : 'Bright'}</span></p>
     </div>
   );
 };
@@ -26,8 +26,9 @@ const SensorStatus = ({ light_level, flame_status }) => {
 const SensorDataGraph = () => {
   const [temperature, setTemperature] = useState(0);
   const [humidity, setHumidity] = useState(0);
-  const [light_level, setLightLevel] = useState(0); // Initialize with 0
-  const [flame_status, setFlameStatus] = useState(0); // Initialize with 0
+
+  const [light_level, setlightlevels] = useState(false);
+  const [flame_status, setflameStatus] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,8 +48,8 @@ const SensorDataGraph = () => {
         const latestData = data[data.length - 1]; // Assuming latest data has the latest status
         setTemperature(latestData.temperature);
         setHumidity(latestData.humidity);
-        setLightLevel(latestData.light_level); // Ensure correct field is used
-        setFlameStatus(latestData.flame_status); // Ensure correct field is used
+        setlightlevels(latestData.light_level);
+        setflameStatus(latestData.flame_status);
   
       } catch (error) {
         console.error('Error fetching data:', error);
